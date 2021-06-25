@@ -1,6 +1,6 @@
 let fs = require('fs');
-let file1 = fs.readFileSync('file1','utf-8').slice(1,-1);
-let file2 = fs.readFileSync('file2','utf-8').slice(1,-1);
+let file1 = fs.readFileSync('file1','utf-8').slice(1,-1); // не удаляешь после того как использовал. 
+let file2 = fs.readFileSync('file2','utf-8').slice(1,-1); // Ещё и ручками убрал " в самом начале, хотя алгоритм работает и без этого
 
 function first_way(){ // плохой вариант
       let arr_file1 = file1.split(' ');
@@ -25,7 +25,8 @@ function first_way(){ // плохой вариант
       }
       console.log(count);
 }
-function second_way(){
+function second_way(file1,file2){ // Передавай параметрами переменные. 
+                                  // Изза того что ты использовал внешнюю переменную в функции её считает глобальной и её никогда не удалит сборщик мусора пока прога работает
       let first_file_names = get_name(file1);
       let second_file_names = get_name(file2);
       let flag = false;
@@ -37,7 +38,7 @@ function second_way(){
                         break;
                   }
             }
-            if(!flag){
+            if(!flag){ //красавчик. тут респект. Всё сделано чисто
                   console.log(i);
                   count++;
             }
@@ -58,4 +59,4 @@ function get_name(string){
 
 
 // first_way();
-second_way();
+second_way(file1,file2);
